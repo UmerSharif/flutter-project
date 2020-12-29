@@ -13,6 +13,7 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   var questionIndex = 0;
+
   void answerChosen() {
     setState(() {
       questionIndex = questionIndex + 1;
