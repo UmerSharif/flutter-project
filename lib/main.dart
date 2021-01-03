@@ -14,6 +14,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final questions = const [
+    {
+      'questionText': 'What\'s your favourite color ?',
+      'answers': ['Black', 'Red', 'Green'],
+    },
+    {
+      'questionText': 'What\'s your favourite animal?',
+      'answers': ['Dog', 'Goat', 'Camel']
+    },
+    {
+      'questionText': 'What\'s your favourite IDE?',
+      'answers': ['Vim', 'Storm', 'VsCode']
+    },
+  ];
   var _questionIndex = 0;
 
   void _answerChosen() {
@@ -25,20 +39,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    var questions = [
-      {
-        'questionText': 'What\'s your favourite color ?',
-        'answers': ['Black', 'Red', 'Green'],
-      },
-      {
-        'questionText': 'What\'s your favourite animal?',
-        'answers': ['Dog', 'Goat', 'Camel']
-      },
-      {
-        'questionText': 'What\'s your favourite IDE?',
-        'answers': ['Vim', 'Storm', 'VsCode']
-      },
-    ];
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
@@ -62,3 +62,4 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+// ... because coloum takes a list of widgets, this will prevent nested list
