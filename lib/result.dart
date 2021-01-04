@@ -1,10 +1,10 @@
-class name extends StatelessWidget {
-  const name({Key key}) : super(key: key);
+import 'package:flutter/material.dart';
+
+class Result extends StatelessWidget {
+  const Result({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: child,
-    );
+    return Center(child: Text("No More question"));
   }
 }
