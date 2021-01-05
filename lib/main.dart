@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import './answer.dart';
-import './question.dart';
+
+import 'quiz.dart';
+import 'result.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,27 +15,50 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final questions = const [
+  final _questions = const [
     {
-      'questionText': 'What\'s your favourite color ?',
-      'answers': ['Black', 'Red', 'Green'],
+      'questionText': 'What\'s your favorite color?',
+      'answers': [
+        {'text': 'Black', 'score': 10},
+        {'text': 'Red', 'score': 5},
+        {'text': 'Green', 'score': 3},
+        {'text': 'White', 'score': 1},
+      ],
     },
     {
-      'questionText': 'What\'s your favourite animal?',
-      'answers': ['Dog', 'Goat', 'Camel']
+      'questionText': 'What\'s your favorite animal?',
+      'answers': [
+        {'text': 'Rabbit', 'score': 3},
+        {'text': 'Snake', 'score': 11},
+        {'text': 'Elephant', 'score': 5},
+        {'text': 'Lion', 'score': 9},
+      ],
     },
     {
-      'questionText': 'What\'s your favourite IDE?',
-      'answers': ['Vim', 'Storm', 'VsCode']
+      'questionText': 'Who\'s your favorite instructor?',
+      'answers': [
+        {'text': 'Max', 'score': 1},
+        {'text': 'Max', 'score': 1},
+        {'text': 'Max', 'score': 1},
+        {'text': 'Max', 'score': 1},
+      ],
     },
   ];
   var _questionIndex = 0;
+  var _totalScore = 0;
 
-  void _answerChosen() {
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = (_questionIndex + _questions.length) % _questions.length;
+      _totalScore = 0;
+    });
+  }
+
+  void _answerChosen(int score) {
+    _totalScore += score;
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
-    print(_questionIndex);
   }
 
   @override
@@ -44,24 +68,16 @@ class _MyAppState extends State<MyApp> {
           appBar: AppBar(
             title: Text("MY Text is here"),
           ),
-          body: _questionIndex < questions.length
-              ? Column(
-                  children: [
-                    Question(
-                      questionText: questions[_questionIndex]['questionText'],
-                    ),
-                    ...(questions[_questionIndex]['answers'] as List<String>)
-                        .map((answer) {
-                      return Answer(
-                          answerChosenHandler: _answerChosen,
-                          answerText: answer);
-                    }).toList()
-                    //    Answer(answerChosenHandler: _answerChosen),
-                    //    Answer(answerChosenHandler: _answerChosen),
-                    //    Answer(answerChosenHandler: _answerChosen),
-                  ],
+          body: _questionIndex < _questions.length
+              ? Quiz(
+                  questions: _questions,
+                  questionIndex: _questionIndex,
+                  answerChosen: _answerChosen,
                 )
-              : Center(child: Text("No More question"))),
+              : Result(
+                  totalScore: _totalScore,
+                  resetQuiz: _resetQuiz,
+                )),
     );
   }
 }
