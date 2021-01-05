@@ -28,7 +28,11 @@ class Result extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         Text("Total Score is: $totalScore"),
-        FlatButton(onPressed: resetQuiz, child: Text("Restart Quiz"))
+        FlatButton(
+          onPressed: resetQuiz,
+          child: Text("Restart Quiz"),
+          textColor: Colors.teal,
+        )
       ],
     ));
   }
